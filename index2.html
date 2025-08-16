@@ -558,9 +558,34 @@
                                     <option value="1.725">Very Active</option>
                                 </select>
                             </div>
-                            <button onclick="calculateWater()" style="background: var(--primary); color: #fff; border: none; border-radius: 5px; padding: 0.7rem 1.5rem; cursor: pointer; width: 100%;">Calculate Water Intake</button>
+                            <button id="water-btn" style="background: var(--primary); color: #fff; border: none; border-radius: 5px; padding: 0.7rem 1.5rem; cursor: pointer; width: 100%;">Calculate Water Intake</button>
                             <div id="water-result" style="margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none;"></div>
                         </div>
+                        <script>
+                        // Water Intake Calculator JS
+                        function animateResult(element, value, text) {
+                            element.style.opacity = 0;
+                            element.style.display = "block";
+                            setTimeout(() => {
+                                element.innerHTML = text;
+                                element.style.opacity = 1;
+                            }, 200);
+                        }
+
+                        document.getElementById('water-btn').onclick = function() {
+                            const weight = parseFloat(document.getElementById('water-weight').value);
+                            const activity = parseFloat(document.getElementById('water-activity').value);
+                            const resultDiv = document.getElementById('water-result');
+                            if (!weight || weight <= 0) {
+                                animateResult(resultDiv, 0, '<span style="color:#e74c3c;">Please enter a valid weight.</span>');
+                                return;
+                            }
+                            // Simple formula: 35ml per kg * activity factor
+                            const waterMl = weight * 35 * activity;
+                            const waterL = waterMl / 1000;
+                            animateResult(resultDiv, waterL, `Recommended daily water intake:<br><span style="color:var(--primary);font-size:1.3em;">${waterL.toFixed(2)} L</span>`);
+                        };
+                        </script>
                         <script>
                         // BMI Calculator with animation
                         function animateResult(element, value, text) {
