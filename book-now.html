@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Tests & Health Checkups</title>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+        }
+        body {
+            background: #f4f6fb;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 2rem 0 1.5rem 0;
+            text-align: center;
+        }
+        /* Responsive grid helpers */
+        @media (max-width: 600px) {
+            .section-title { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <button id="back-to-home-btn" style="
+        position: fixed;
+        top: 24px;
+        left: 24px;
+        z-index: 1000;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 0.7rem 1.6rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        box-shadow: 0 4px 16px rgba(79,70,229,0.12);
+        cursor: pointer;
+        transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+        display: flex;
+        align-items: center;
+        gap: 0.7em;
+    " 
+    onmouseover="this.style.transform='scale(1.07)';this.style.boxShadow='0 8px 24px rgba(79,70,229,0.18)';"
+    onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 16px rgba(79,70,229,0.12)';"
+    onclick="animateAndGoHome()"
+    >
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Home
+    </button>
+    <script>
+    function animateAndGoHome() {
+        var btn = document.getElementById('back-to-home-btn');
+        btn.style.transform = 'scale(0.92) rotate(-3deg)';
+        btn.style.transition = 'transform 0.18s cubic-bezier(.4,2,.6,1)';
+        setTimeout(function() {
+            window.location.href = 'index2.html';
+        }, 140);
+    }
+    </script>
+    <section id="lab-tests-page" style="display:block;">
+        <div class="section-title">Lab Tests &amp; Health Checkups</div>
+        
+        <!-- Test Categories -->
+        <div style="margin: 2rem 0;">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">Popular Test Categories</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="background: #fff; border-radius: 10px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(60,60,60,0.08); border-left: 4px solid var(--primary); cursor: pointer;" onclick="showTestCategory('diabetes')">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-syringe" style="color: var(--primary); font-size: 2rem; margin-right: 1rem;"></i>
+                        <div>
+                            <h4 style="margin: 0; color: var(--primary);">Diabetes Tests</h4>
+                            <p style="margin: 0.5rem 0 0 0; color: #666; font-size: 0.9rem;">Starting from ₹299</p>
+                        </div>
+                    </div>
+                    <p style="color: #666; font-size: 0.9rem;">Blood sugar, HbA1c, and related tests for diabetes management.</p>
+                </div>
+                
+                <div style="background: #fff; border-radius: 10px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(60,60,60,0.08); border-left: 4px solid #28a745; cursor: pointer;" onclick="showTestCategory('cardiac')">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-heart-pulse" style="color: #28a745; font-size: 2rem; margin-right: 1rem;"></i>
+                        <div>
+                            <h4 style="margin: 0; color: #28a745;">Cardiac Tests</h4>
+                            <p style="margin: 0.5rem 0 0 0; color: #666; font-size: 0.9rem;">Starting from ₹599</p>
+                        </div>
+                    </div>
+                    <p style="color: #666; font-size: 0.9rem;">Heart health screening including cholesterol and cardiac markers.</p>
+                </div>
+                
+                <div style="background: #fff; border-radius: 10px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(60,60,60,0.08); border-left: 4px solid #ffc107; cursor: pointer;" onclick="showTestCategory('thyroid')">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-brain" style="color: #ffc107; font-size: 2rem; margin-right: 1rem;"></i>
+                        <div>
+                            <h4 style="margin: 0; color: #ffc107;">Thyroid Tests</h4>
+                            <p style="margin: 0.5rem 0 0 0; color: #666; font-size: 0.9rem;">Starting from ₹399</p>
+                        </div>
+                    </div>
+                    <p style="color: #666; font-size: 0.9rem;">Complete thyroid profile including T3, T4, and TSH levels.</p>
+                </div>
+                
+                <div style="background: #fff; border-radius: 10px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(60,60,60,0.08); border-left: 4px solid #dc3545; cursor: pointer;" onclick="showTestCategory('liver')">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-lungs" style="color: #dc3545; font-size: 2rem; margin-right: 1rem;"></i>
+                        <div>
+                            <h4 style="margin: 0; color: #dc3545;">Liver Function</h4>
+                            <p style="margin: 0.5rem 0 0 0; color: #666; font-size: 0.9rem;">Starting from ₹449</p>
+                        </div>
+                    </div>
+                    <p style="color: #666; font-size: 0.9rem;">Liver function tests including enzymes and protein levels.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Health Packages -->
+        <style>
+            @keyframes fadeInUp {
+                0% {
+                    opacity: 0;
+                    transform: translateY(40px) scale(0.96);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+            .package-card {
+                animation: fadeInUp 0.8s cubic-bezier(.23,1.01,.32,1) both;
+                transition: transform 0.2s, box-shadow 0.2s;
+                will-change: transform;
+            }
+            .package-card:hover {
+                transform: translateY(-8px) scale(1.03);
+                box-shadow: 0 8px 32px rgba(60,60,60,0.18);
+                z-index: 2;
+            }
+            .book-btn-animate {
+                transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            }
+            .book-btn-animate:active {
+                background: var(--primary);
+                color: #fff !important;
+                box-shadow: 0 2px 12px rgba(60,60,60,0.18);
+            }
+        </style>
+        <div style="margin: 3rem 0;">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">Health Checkup Packages</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="package-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; border-radius: 15px; padding: 2rem; position: relative; overflow: hidden; animation-delay: 0.1s;">
+                    <div style="position: absolute; top: -20px; right: -20px; background: rgba(255,255,255,0.1); width: 100px; height: 100px; border-radius: 50%;"></div>
+                    <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">Basic Health Checkup</h4>
+                    <div style="font-size: 2rem; font-weight: bold; margin-bottom: 1rem;">₹999</div>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>Complete Blood Count (CBC)</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>Blood Sugar (Fasting)</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>Kidney Function Test</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>Liver Function Test</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>Thyroid Profile (TSH)</li>
+                    </ul>
+                    <button 
+                        class="book-btn-animate"
+                        onclick="animatedBookNow('basic', 'Basic Health Checkup')" 
+                        style="background: #fff; color: var(--primary); border: none; border-radius: 8px; padding: 0.8rem 1.5rem; font-weight: 600; cursor: pointer; width: 100%;"
+                    >Book Now</button>
+                </div>
+                
+                <div class="package-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: #fff; border-radius: 15px; padding: 2rem; position: relative; overflow: hidden; animation-delay: 0.2s;">
+                    <div style="position: absolute; top: -20px; right: -20px; background: rgba(255,255,255,0.1); width: 100px; height: 100px; border-radius: 50%;"></div>
+                    <div style="position: absolute; top: 1rem; right: 1rem; background: #ff6b6b; color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">POPULAR</div>
+                    <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">Comprehensive Health Checkup</h4>
+                    <div style="font-size: 2rem; font-weight: bold; margin-bottom: 1rem;">₹1,999</div>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>All Basic Tests</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>Lipid Profile</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>Cardiac Markers</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>Vitamin D &amp; B12</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>Urine Analysis</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>ECG</li>
+                    </ul>
+                    <button 
+                        class="book-btn-animate"
+                        onclick="animatedBookNow('comprehensive', 'Comprehensive Health Checkup')" 
+                        style="background: #fff; color: var(--primary); border: none; border-radius: 8px; padding: 0.8rem 1.5rem; font-weight: 600; cursor: pointer; width: 100%;"
+                    >Book Now</button>
+                </div>
+                
+                <div class="package-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: #fff; border-radius: 15px; padding: 2rem; position: relative; overflow: hidden; animation-delay: 0.3s;">
+                    <div style="position: absolute; top: -20px; right: -20px; background: rgba(255,255,255,0.1); width: 100px; height: 100px; border-radius: 50%;"></div>
+                    <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">Premium Health Checkup</h4>
+                    <div style="font-size: 2rem; font-weight: bold; margin-bottom: 1rem;">₹3,499</div>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>All Comprehensive Tests</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>Cancer Markers</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>Hormone Profile</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>2D Echo</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>X-Ray Chest</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i>Doctor Consultation</li>
+                    </ul>
+                    <button 
+                        class="book-btn-animate"
+                        onclick="animatedBookNow('premium', 'Premium Health Checkup')" 
+                        style="background: #fff; color: var(--primary); border: none; border-radius: 8px; padding: 0.8rem 1.5rem; font-weight: 600; cursor: pointer; width: 100%;"
+                    >Book Now</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Animate cards with staggered delay
+            document.addEventListener('DOMContentLoaded', function() {
+                const cards = document.querySelectorAll('.package-card');
+                cards.forEach((card, i) => {
+                    card.style.animationDelay = (0.1 + i * 0.1) + 's';
+                });
+            });
+
+            // Book Now button logic with animation and feedback
+            function animatedBookNow(packageKey, packageName) {
+                // Animate button
+                const btn = event.currentTarget;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Processing...';
+                setTimeout(() => {
+                    // Show booking form, prefill package, scroll to form, show toast
+                    if (typeof bookPackage === 'function') {
+                        bookPackage(packageKey);
+                    }
+                    // Prefill the test/package name in the form if possible
+                    const testInput = document.getElementById('selected-test');
+                    if (testInput) testInput.value = packageName;
+                    // Show a toast/confirmation
+                    showToast('Booking form opened for "' + packageName + '"');
+                    // Scroll to form
+                    const form = document.getElementById('test-booking-form');
+                    if (form) {
+                        form.style.display = 'block';
+                        form.scrollIntoView({behavior: 'smooth', block: 'center'});
+                    }
+                    btn.disabled = false;
+                    btn.innerHTML = 'Book Now';
+                }, 900);
+            }
+
+            // Simple toast notification
+            function showToast(msg) {
+                let toast = document.getElementById('custom-toast');
+                if (!toast) {
+                    toast = document.createElement('div');
+                    toast.id = 'custom-toast';
+                    toast.style.position = 'fixed';
+                    toast.style.bottom = '2rem';
+                    toast.style.left = '50%';
+                    toast.style.transform = 'translateX(-50%)';
+                    toast.style.background = 'rgba(40,167,69,0.95)';
+                    toast.style.color = '#fff';
+                    toast.style.padding = '1rem 2rem';
+                    toast.style.borderRadius = '30px';
+                    toast.style.fontWeight = '600';
+                    toast.style.fontSize = '1rem';
+                    toast.style.boxShadow = '0 4px 24px rgba(60,60,60,0.18)';
+                    toast.style.zIndex = 9999;
+                    toast.style.opacity = 0;
+                    toast.style.transition = 'opacity 0.3s';
+                    document.body.appendChild(toast);
+                }
+                toast.textContent = msg;
+                toast.style.opacity = 1;
+                setTimeout(() => {
+                    toast.style.opacity = 0;
+                }, 1800);
+            }
+        </script>
+        
+        <!-- Test Booking Form -->
+         
+        <div id="test-booking-form" style="display: none; background: #f8f9fa; border-radius: 10px; padding: 2rem; margin: 2rem 0;">
+            <h3 id="test-form-title" style="color: var(--primary); margin-bottom: 1.5rem;">Book Your Test</h3>
+            <form id="lab-test-booking-form" onsubmit="submitTestBooking(event)">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Full Name</label>
+                        <input type="text" name="name" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Phone Number</label>
+                        <input type="tel" name="phone" required pattern="[0-9]{10,}" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email</label>
+                        <input type="email" name="email" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Age</label>
+                        <input type="number" name="age" required min="1" max="120" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Complete Address</label>
+                    <textarea name="address" required rows="3" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; resize: vertical;"></textarea>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Preferred Date</label>
+                        <input type="date" name="date" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Preferred Time</label>
+                        <select name="time" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                            <option value="">Select Time</option>
+                            <option value="06:00-08:00">6:00 AM - 8:00 AM</option>
+                            <option value="08:00-10:00">8:00 AM - 10:00 AM</option>
+                            <option value="10:00-12:00">10:00 AM - 12:00 PM</option>
+                            <option value="12:00-14:00">12:00 PM - 2:00 PM</option>
+                            <option value="14:00-16:00">2:00 PM - 4:00 PM</option>
+                            <option value="16:00-18:00">4:00 PM - 6:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Test Type / Package</label>
+                    <input type="text" id="selected-test" name="testType" readonly style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; background: #f8f9fa;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Special Instructions (Optional)</label>
+                    <textarea name="instructions" rows="2" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; resize: vertical;" placeholder="Any specific instructions or medical conditions we should know about..."></textarea>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <button type="submit" style="background: var(--primary); color: #fff; border: none; border-radius: 8px; padding: 1rem 2rem; font-weight: 600; cursor: pointer; font-size: 1.1rem;">Confirm Booking</button>
+                    <button type="button" onclick="closeTestBooking()" style="background: #6c757d; color: #fff; border: none; border-radius: 8px; padding: 1rem 2rem; font-weight: 600; cursor: pointer;">Cancel</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Why Choose Our Lab Services -->
+        <div style="margin: 3rem 0;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Why Choose Our Lab Services?</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="background: #fff; border-radius: 10px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 12px rgba(60,60,60,0.08);">
+                    <i class="fa-solid fa-home" style="color: var(--primary); font-size: 2.5rem; margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Home Sample Collection</h4>
+                    <p style="color: #666; font-size: 0.9rem;">Trained phlebotomists collect samples from your home at your preferred time.</p>
+                </div>
+                <div style="background: #fff; border-radius: 10px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 12px rgba(60,60,60,0.08);">
+                    <i class="fa-solid fa-certificate" style="color: var(--primary); font-size: 2.5rem; margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">NABL Accredited Labs</h4>
+                    <p style="color: #666; font-size: 0.9rem;">All tests are conducted in NABL accredited laboratories ensuring accuracy.</p>
+                </div>
+                <div style="background: #fff; border-radius: 10px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 12px rgba(60,60,60,0.08);">
+                    <i class="fa-solid fa-clock" style="color: var(--primary); font-size: 2.5rem; margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Quick Reports</h4>
+                    <p style="color: #666; font-size: 0.9rem;">Get your reports within 24-48 hours via email and SMS notifications.</p>
+                </div>
+                <div style="background: #fff; border-radius: 10px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 12px rgba(60,60,60,0.08);">
+                    <i class="fa-solid fa-shield-halved" style="color: var(--primary); font-size: 2.5rem; margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Safe &amp; Hygienic</h4>
+                    <p style="color: #666; font-size: 0.9rem;">All safety protocols followed with sterilized equipment and PPE kits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Dummy JS functions to prevent errors if not defined elsewhere
+        function showTestCategory(cat) {
+            document.getElementById('test-booking-form').style.display = 'block';
+            document.getElementById('selected-test').value = {
+                diabetes: 'Diabetes Tests',
+                cardiac: 'Cardiac Tests',
+                thyroid: 'Thyroid Tests',
+                liver: 'Liver Function'
+            }[cat] || '';
+            document.getElementById('test-form-title').textContent = 'Book ' + document.getElementById('selected-test').value;
+        }
+        function bookPackage(pkg) {
+            document.getElementById('test-booking-form').style.display = 'block';
+            document.getElementById('selected-test').value = {
+                basic: 'Basic Health Checkup',
+                comprehensive: 'Comprehensive Health Checkup',
+                premium: 'Premium Health Checkup'
+            }[pkg] || '';
+            document.getElementById('test-form-title').textContent = 'Book ' + document.getElementById('selected-test').value;
+        }
+        function closeTestBooking() {
+            document.getElementById('test-booking-form').style.display = 'none';
+            document.getElementById('selected-test').value = '';
+            document.getElementById('test-form-title').textContent = 'Book Your Test';
+        }
+        function submitTestBooking(e) {
+            e.preventDefault();
+            alert('Your booking has been submitted!');
+            closeTestBooking();
+        }
+    </script>
+</body>
+</html>

@@ -440,3 +440,41 @@ main {
         padding: 1rem 0.5rem;
     }
 }
+
+.booking-test {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin: 2rem 0;
+    animation: fadeIn 0.7s;
+    transition: box-shadow 0.2s;
+}
+
+.booking-test > div {
+    animation: slideUp 0.7s;
+}
+
+@media (max-width: 900px) {
+    .booking-test {
+        margin: 1.2rem 0;
+    }
+    .booking-test > div {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.8rem !important;
+        padding: 1rem 0.7rem !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .booking-test {
+        margin: 0.7rem 0;
+    }
+    .booking-test > div {
+        padding: 0.7rem 0.4rem !important;
+        font-size: 0.97rem;
+    }
+    .booking-test i {
+        font-size: 1.3rem !important;
+    }
+}
